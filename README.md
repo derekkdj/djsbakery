@@ -1,3 +1,3 @@
-# djsbakery
+# DJ's Bakery
 
-Official website for DJ's Bakery.
+Official Website for DJ's Bakery
