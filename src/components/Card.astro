@@ -1,61 +1,53 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+  __typename: string;
+  title: string;
+  image: {
+    url: string;
+  };
+  url: string;
+  cta: string;
 }
 
-const { href, title, body } = Astro.props;
+const { image, title, url, cta } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
-<style>
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: white;
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
-	}
-</style>
+<div class="bg-tertiary aspect-[1/1] relative">
+  <a class="block absolute w-full h-full top-0 left-0" href={url}>
+    <Image
+      src={image.url}
+      alt={title}
+      width={500}
+      height={500}
+      class="absolute w-100 h-auto"
+      widths={[300, 500, 900]}
+      sizes="100vw"
+      loading="lazy"
+    />
+
+    <!-- <img
+      v-else
+      :src="image"
+      :alt="title"
+      class="absolute w-100 h-auto"
+      loading="lazy"
+      width="500"
+      height="500"
+    /> -->
+
+    <button class="cta absolute bottom-4 right-4">{cta}</button>
+    <div class="absolute top-6 md:top-auto md:-bottom-6 left-8">
+      <h3>
+        <span
+          class="block text-primary font-bold font-title text-4xl md:text-6xl"
+          >your</span
+        ><span
+          class="block text-dark font-bold font-title text-3xl sm:text-4xl md:text-6xl sm:ml-8 sm:-mt-2"
+          >{title}</span
+        >
+      </h3>
+    </div></a
+  >
+</div>
